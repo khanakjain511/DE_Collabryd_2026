@@ -22,12 +22,12 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead | Khanak Jain | 2501010219 | khanakjain511 |
+| Member 2 | Shreyansh Agarwal | 2501010625 | shreyanshagarwal |
+| Member 3 | Akshay Kumar Singh | 2501010582 | akshay26-ui |
+| Member 4 | Labhansh Agarwal | 2501010696 | ARISTOTLE777 |
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
+**Team No.:** T0021 · **Section:** E · **Repository URL:** https://github.com/khanakjain511/DE_Collabryd_2026.git
 
 ---
 
