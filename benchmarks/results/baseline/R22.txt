@@ -1,0 +1,90 @@
+=== R22 run 1 ===
+Gather Merge  (cost=6049.93..6062.69 rows=112 width=37) (actual time=8.706..13.965 rows=97.00 loops=1)
+  Workers Planned: 1
+  Workers Launched: 1
+  Buffers: shared hit=3009
+  ->  Sort  (cost=5049.92..5050.08 rows=66 width=37) (actual time=6.521..6.522 rows=48.50 loops=2)
+        Sort Key: p.paid_at DESC
+        Sort Method: quicksort  Memory: 27kB
+        Buffers: shared hit=3009
+        Worker 0:  Sort Method: quicksort  Memory: 27kB
+        ->  Nested Loop  (cost=0.71..5047.92 rows=66 width=37) (actual time=6.112..6.499 rows=48.50 loops=2)
+              Buffers: shared hit=3001
+              ->  Nested Loop  (cost=0.42..5027.35 rows=66 width=26) (actual time=6.099..6.264 rows=48.50 loops=2)
+                    Buffers: shared hit=2709
+                    ->  Parallel Seq Scan on payments p  (cost=0.00..4489.17 rows=66 width=30) (actual time=6.069..6.162 rows=48.50 loops=2)
+                          Filter: ((paid_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone) AND ((payment_status)::text = 'FAILED'::text))
+                          Rows Removed by Filter: 122871
+                          Buffers: shared hit=2320
+                    ->  Index Scan using trips_pkey on trips t  (cost=0.42..8.15 rows=1 width=12) (actual time=0.002..0.002 rows=1.00 loops=97)
+                          Index Cond: (trip_id = p.trip_id)
+                          Index Searches: 97
+                          Buffers: shared hit=389
+              ->  Index Scan using riders_pkey on riders r  (cost=0.29..0.31 rows=1 width=15) (actual time=0.005..0.005 rows=1.00 loops=97)
+                    Index Cond: (rider_id = t.rider_id)
+                    Index Searches: 97
+                    Buffers: shared hit=292
+Planning:
+  Buffers: shared hit=441
+Planning Time: 0.720 ms
+Execution Time: 14.016 ms
+=== R22 run 2 ===
+Gather Merge  (cost=6049.93..6062.69 rows=112 width=37) (actual time=6.269..7.080 rows=97.00 loops=1)
+  Workers Planned: 1
+  Workers Launched: 1
+  Buffers: shared hit=3009
+  ->  Sort  (cost=5049.92..5050.08 rows=66 width=37) (actual time=4.817..4.818 rows=48.50 loops=2)
+        Sort Key: p.paid_at DESC
+        Sort Method: quicksort  Memory: 27kB
+        Buffers: shared hit=3009
+        Worker 0:  Sort Method: quicksort  Memory: 27kB
+        ->  Nested Loop  (cost=0.71..5047.92 rows=66 width=37) (actual time=4.552..4.800 rows=48.50 loops=2)
+              Buffers: shared hit=3001
+              ->  Nested Loop  (cost=0.42..5027.35 rows=66 width=26) (actual time=4.541..4.670 rows=48.50 loops=2)
+                    Buffers: shared hit=2709
+                    ->  Parallel Seq Scan on payments p  (cost=0.00..4489.17 rows=66 width=30) (actual time=4.525..4.594 rows=48.50 loops=2)
+                          Filter: ((paid_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone) AND ((payment_status)::text = 'FAILED'::text))
+                          Rows Removed by Filter: 122871
+                          Buffers: shared hit=2320
+                    ->  Index Scan using trips_pkey on trips t  (cost=0.42..8.15 rows=1 width=12) (actual time=0.001..0.001 rows=1.00 loops=97)
+                          Index Cond: (trip_id = p.trip_id)
+                          Index Searches: 97
+                          Buffers: shared hit=389
+              ->  Index Scan using riders_pkey on riders r  (cost=0.29..0.31 rows=1 width=15) (actual time=0.003..0.003 rows=1.00 loops=97)
+                    Index Cond: (rider_id = t.rider_id)
+                    Index Searches: 97
+                    Buffers: shared hit=292
+Planning:
+  Buffers: shared hit=441
+Planning Time: 0.621 ms
+Execution Time: 7.116 ms
+=== R22 run 3 ===
+Gather Merge  (cost=6049.93..6062.69 rows=112 width=37) (actual time=6.036..6.865 rows=97.00 loops=1)
+  Workers Planned: 1
+  Workers Launched: 1
+  Buffers: shared hit=3009
+  ->  Sort  (cost=5049.92..5050.08 rows=66 width=37) (actual time=4.852..4.853 rows=48.50 loops=2)
+        Sort Key: p.paid_at DESC
+        Sort Method: quicksort  Memory: 27kB
+        Buffers: shared hit=3009
+        Worker 0:  Sort Method: quicksort  Memory: 27kB
+        ->  Nested Loop  (cost=0.71..5047.92 rows=66 width=37) (actual time=4.582..4.835 rows=48.50 loops=2)
+              Buffers: shared hit=3001
+              ->  Nested Loop  (cost=0.42..5027.35 rows=66 width=26) (actual time=4.571..4.703 rows=48.50 loops=2)
+                    Buffers: shared hit=2709
+                    ->  Parallel Seq Scan on payments p  (cost=0.00..4489.17 rows=66 width=30) (actual time=4.553..4.621 rows=48.50 loops=2)
+                          Filter: ((paid_at >= '2026-06-24 00:00:00+05:30'::timestamp with time zone) AND ((payment_status)::text = 'FAILED'::text))
+                          Rows Removed by Filter: 122871
+                          Buffers: shared hit=2320
+                    ->  Index Scan using trips_pkey on trips t  (cost=0.42..8.15 rows=1 width=12) (actual time=0.001..0.001 rows=1.00 loops=97)
+                          Index Cond: (trip_id = p.trip_id)
+                          Index Searches: 97
+                          Buffers: shared hit=389
+              ->  Index Scan using riders_pkey on riders r  (cost=0.29..0.31 rows=1 width=15) (actual time=0.003..0.003 rows=1.00 loops=97)
+                    Index Cond: (rider_id = t.rider_id)
+                    Index Searches: 97
+                    Buffers: shared hit=292
+Planning:
+  Buffers: shared hit=441
+Planning Time: 0.806 ms
+Execution Time: 6.904 ms

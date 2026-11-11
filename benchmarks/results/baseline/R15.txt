@@ -1,0 +1,99 @@
+=== R15 run 1 ===
+Nested Loop Left Join  (cost=1.69..41.80 rows=1 width=82) (actual time=0.045..0.046 rows=1.00 loops=1)
+  Buffers: shared hit=20
+  ->  Nested Loop  (cost=1.27..33.35 rows=1 width=71) (actual time=0.033..0.034 rows=1.00 loops=1)
+        Buffers: shared hit=16
+        ->  Nested Loop  (cost=0.99..25.05 rows=1 width=64) (actual time=0.027..0.027 rows=1.00 loops=1)
+              Buffers: shared hit=13
+              ->  Nested Loop  (cost=0.71..16.75 rows=1 width=56) (actual time=0.021..0.021 rows=1.00 loops=1)
+                    Buffers: shared hit=10
+                    ->  Index Scan using trips_pkey on trips t  (cost=0.42..8.44 rows=1 width=48) (actual time=0.013..0.013 rows=1.00 loops=1)
+                          Index Cond: (trip_id = 123458)
+                          Index Searches: 1
+                          Buffers: shared hit=7
+                    ->  Index Scan using riders_pkey on riders r  (cost=0.29..8.30 rows=1 width=16) (actual time=0.007..0.007 rows=1.00 loops=1)
+                          Index Cond: (rider_id = t.rider_id)
+                          Index Searches: 1
+                          Buffers: shared hit=3
+              ->  Index Scan using drivers_pkey on drivers d  (cost=0.28..8.30 rows=1 width=16) (actual time=0.005..0.005 rows=1.00 loops=1)
+                    Index Cond: (driver_id = t.driver_id)
+                    Index Searches: 1
+                    Buffers: shared hit=3
+        ->  Index Scan using vehicles_vehicle_id_driver_id_key on vehicles v  (cost=0.28..8.30 rows=1 width=15) (actual time=0.006..0.006 rows=1.00 loops=1)
+              Index Cond: (vehicle_id = t.vehicle_id)
+              Index Searches: 1
+              Buffers: shared hit=3
+  ->  Index Scan using payments_trip_id_key on payments p  (cost=0.42..8.44 rows=1 width=19) (actual time=0.011..0.011 rows=1.00 loops=1)
+        Index Cond: (trip_id = 123458)
+        Index Searches: 1
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=528
+Planning Time: 0.840 ms
+Execution Time: 0.083 ms
+=== R15 run 2 ===
+Nested Loop Left Join  (cost=1.69..41.80 rows=1 width=82) (actual time=0.042..0.043 rows=1.00 loops=1)
+  Buffers: shared hit=20
+  ->  Nested Loop  (cost=1.27..33.35 rows=1 width=71) (actual time=0.031..0.032 rows=1.00 loops=1)
+        Buffers: shared hit=16
+        ->  Nested Loop  (cost=0.99..25.05 rows=1 width=64) (actual time=0.027..0.027 rows=1.00 loops=1)
+              Buffers: shared hit=13
+              ->  Nested Loop  (cost=0.71..16.75 rows=1 width=56) (actual time=0.021..0.022 rows=1.00 loops=1)
+                    Buffers: shared hit=10
+                    ->  Index Scan using trips_pkey on trips t  (cost=0.42..8.44 rows=1 width=48) (actual time=0.014..0.014 rows=1.00 loops=1)
+                          Index Cond: (trip_id = 123458)
+                          Index Searches: 1
+                          Buffers: shared hit=7
+                    ->  Index Scan using riders_pkey on riders r  (cost=0.29..8.30 rows=1 width=16) (actual time=0.006..0.006 rows=1.00 loops=1)
+                          Index Cond: (rider_id = t.rider_id)
+                          Index Searches: 1
+                          Buffers: shared hit=3
+              ->  Index Scan using drivers_pkey on drivers d  (cost=0.28..8.30 rows=1 width=16) (actual time=0.005..0.005 rows=1.00 loops=1)
+                    Index Cond: (driver_id = t.driver_id)
+                    Index Searches: 1
+                    Buffers: shared hit=3
+        ->  Index Scan using vehicles_vehicle_id_driver_id_key on vehicles v  (cost=0.28..8.30 rows=1 width=15) (actual time=0.005..0.005 rows=1.00 loops=1)
+              Index Cond: (vehicle_id = t.vehicle_id)
+              Index Searches: 1
+              Buffers: shared hit=3
+  ->  Index Scan using payments_trip_id_key on payments p  (cost=0.42..8.44 rows=1 width=19) (actual time=0.010..0.010 rows=1.00 loops=1)
+        Index Cond: (trip_id = 123458)
+        Index Searches: 1
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=528
+Planning Time: 0.852 ms
+Execution Time: 0.082 ms
+=== R15 run 3 ===
+Nested Loop Left Join  (cost=1.69..41.80 rows=1 width=82) (actual time=0.043..0.043 rows=1.00 loops=1)
+  Buffers: shared hit=20
+  ->  Nested Loop  (cost=1.27..33.35 rows=1 width=71) (actual time=0.031..0.032 rows=1.00 loops=1)
+        Buffers: shared hit=16
+        ->  Nested Loop  (cost=0.99..25.05 rows=1 width=64) (actual time=0.026..0.027 rows=1.00 loops=1)
+              Buffers: shared hit=13
+              ->  Nested Loop  (cost=0.71..16.75 rows=1 width=56) (actual time=0.021..0.021 rows=1.00 loops=1)
+                    Buffers: shared hit=10
+                    ->  Index Scan using trips_pkey on trips t  (cost=0.42..8.44 rows=1 width=48) (actual time=0.013..0.013 rows=1.00 loops=1)
+                          Index Cond: (trip_id = 123458)
+                          Index Searches: 1
+                          Buffers: shared hit=7
+                    ->  Index Scan using riders_pkey on riders r  (cost=0.29..8.30 rows=1 width=16) (actual time=0.006..0.006 rows=1.00 loops=1)
+                          Index Cond: (rider_id = t.rider_id)
+                          Index Searches: 1
+                          Buffers: shared hit=3
+              ->  Index Scan using drivers_pkey on drivers d  (cost=0.28..8.30 rows=1 width=16) (actual time=0.005..0.005 rows=1.00 loops=1)
+                    Index Cond: (driver_id = t.driver_id)
+                    Index Searches: 1
+                    Buffers: shared hit=3
+        ->  Index Scan using vehicles_vehicle_id_driver_id_key on vehicles v  (cost=0.28..8.30 rows=1 width=15) (actual time=0.005..0.005 rows=1.00 loops=1)
+              Index Cond: (vehicle_id = t.vehicle_id)
+              Index Searches: 1
+              Buffers: shared hit=3
+  ->  Index Scan using payments_trip_id_key on payments p  (cost=0.42..8.44 rows=1 width=19) (actual time=0.011..0.011 rows=1.00 loops=1)
+        Index Cond: (trip_id = 123458)
+        Index Searches: 1
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=528
+Planning Time: 0.811 ms
+Execution Time: 0.081 ms

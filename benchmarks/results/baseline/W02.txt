@@ -1,0 +1,66 @@
+=== W02 run 1 ===
+Update on trips  (cost=203.50..211.52 rows=0 width=0) (actual time=28.952..28.952 rows=0.00 loops=1)
+  Buffers: shared hit=6491
+  InitPlan 2
+    ->  Result  (cost=203.07..203.08 rows=1 width=8) (actual time=28.641..28.642 rows=1.00 loops=1)
+          Buffers: shared hit=6429
+          InitPlan 1
+            ->  Limit  (cost=0.42..203.07 rows=1 width=8) (actual time=28.637..28.637 rows=1.00 loops=1)
+                  Buffers: shared hit=6429
+                  ->  Index Scan using trips_pkey on trips trips_1  (cost=0.42..14185.59 rows=70 width=8) (actual time=28.636..28.636 rows=1.00 loops=1)
+                        Filter: ((status)::text = 'ONGOING'::text)
+                        Rows Removed by Filter: 299701
+                        Index Searches: 1
+                        Buffers: shared hit=6429
+  ->  Index Scan using trips_pkey on trips  (cost=0.42..8.44 rows=1 width=112) (actual time=28.665..28.666 rows=1.00 loops=1)
+        Index Cond: (trip_id = (InitPlan 2).col1)
+        Index Searches: 1
+        Buffers: shared hit=6433
+Planning:
+  Buffers: shared hit=90
+Planning Time: 0.235 ms
+Execution Time: 29.433 ms
+=== W02 run 2 ===
+Update on trips  (cost=203.50..211.52 rows=0 width=0) (actual time=37.474..37.476 rows=0.00 loops=1)
+  Buffers: shared hit=6492 dirtied=1
+  InitPlan 2
+    ->  Result  (cost=203.07..203.08 rows=1 width=8) (actual time=36.684..36.685 rows=1.00 loops=1)
+          Buffers: shared hit=6429
+          InitPlan 1
+            ->  Limit  (cost=0.42..203.07 rows=1 width=8) (actual time=36.674..36.674 rows=1.00 loops=1)
+                  Buffers: shared hit=6429
+                  ->  Index Scan using trips_pkey on trips trips_1  (cost=0.42..14185.59 rows=70 width=8) (actual time=36.673..36.673 rows=1.00 loops=1)
+                        Filter: ((status)::text = 'ONGOING'::text)
+                        Rows Removed by Filter: 299701
+                        Index Searches: 1
+                        Buffers: shared hit=6429
+  ->  Index Scan using trips_pkey on trips  (cost=0.42..8.44 rows=1 width=112) (actual time=36.737..36.739 rows=1.00 loops=1)
+        Index Cond: (trip_id = (InitPlan 2).col1)
+        Index Searches: 1
+        Buffers: shared hit=6435
+Planning:
+  Buffers: shared hit=90
+Planning Time: 0.264 ms
+Execution Time: 37.588 ms
+=== W02 run 3 ===
+Update on trips  (cost=203.50..211.52 rows=0 width=0) (actual time=87.255..87.256 rows=0.00 loops=1)
+  Buffers: shared hit=6492 dirtied=1
+  InitPlan 2
+    ->  Result  (cost=203.07..203.08 rows=1 width=8) (actual time=85.803..85.804 rows=1.00 loops=1)
+          Buffers: shared hit=6429
+          InitPlan 1
+            ->  Limit  (cost=0.42..203.07 rows=1 width=8) (actual time=85.800..85.800 rows=1.00 loops=1)
+                  Buffers: shared hit=6429
+                  ->  Index Scan using trips_pkey on trips trips_1  (cost=0.42..14185.59 rows=70 width=8) (actual time=85.799..85.799 rows=1.00 loops=1)
+                        Filter: ((status)::text = 'ONGOING'::text)
+                        Rows Removed by Filter: 299701
+                        Index Searches: 1
+                        Buffers: shared hit=6429
+  ->  Index Scan using trips_pkey on trips  (cost=0.42..8.44 rows=1 width=112) (actual time=85.831..85.833 rows=1.00 loops=1)
+        Index Cond: (trip_id = (InitPlan 2).col1)
+        Index Searches: 1
+        Buffers: shared hit=6435
+Planning:
+  Buffers: shared hit=90
+Planning Time: 0.213 ms
+Execution Time: 87.324 ms

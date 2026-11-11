@@ -1,0 +1,63 @@
+=== R08 run 1 ===
+GroupAggregate  (cost=5884.74..6046.92 rows=1167 width=52) (actual time=25.169..35.453 rows=24.00 loops=1)
+  Group Key: (date_trunc('month'::text, paid_at)), method
+  Buffers: shared hit=2366
+  ->  Gather Merge  (cost=5884.74..6017.74 rows=1167 width=18) (actual time=24.826..31.221 rows=77438.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=2366
+        ->  Sort  (cost=4884.73..4886.44 rows=686 width=18) (actual time=23.578..24.432 rows=38719.00 loops=2)
+              Sort Key: (date_trunc('month'::text, paid_at)), method
+              Sort Method: quicksort  Memory: 3083kB
+              Buffers: shared hit=2366
+              Worker 0:  Sort Method: quicksort  Memory: 3015kB
+              ->  Parallel Seq Scan on payments  (cost=0.00..4852.41 rows=686 width=18) (actual time=10.268..19.227 rows=38719.00 loops=2)
+                    Filter: (((payment_status)::text = 'SUCCESS'::text) AND (EXTRACT(year FROM paid_at) = '2026'::numeric))
+                    Rows Removed by Filter: 84200
+                    Buffers: shared hit=2320
+Planning:
+  Buffers: shared hit=146
+Planning Time: 0.303 ms
+Execution Time: 35.496 ms
+=== R08 run 2 ===
+GroupAggregate  (cost=5884.74..6046.92 rows=1167 width=52) (actual time=25.158..34.170 rows=24.00 loops=1)
+  Group Key: (date_trunc('month'::text, paid_at)), method
+  Buffers: shared hit=2366
+  ->  Gather Merge  (cost=5884.74..6017.74 rows=1167 width=18) (actual time=24.819..30.283 rows=77438.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=2366
+        ->  Sort  (cost=4884.73..4886.44 rows=686 width=18) (actual time=23.450..24.225 rows=38719.00 loops=2)
+              Sort Key: (date_trunc('month'::text, paid_at)), method
+              Sort Method: quicksort  Memory: 3149kB
+              Buffers: shared hit=2366
+              Worker 0:  Sort Method: quicksort  Memory: 2949kB
+              ->  Parallel Seq Scan on payments  (cost=0.00..4852.41 rows=686 width=18) (actual time=11.380..19.541 rows=38719.00 loops=2)
+                    Filter: (((payment_status)::text = 'SUCCESS'::text) AND (EXTRACT(year FROM paid_at) = '2026'::numeric))
+                    Rows Removed by Filter: 84200
+                    Buffers: shared hit=2320
+Planning:
+  Buffers: shared hit=146
+Planning Time: 0.266 ms
+Execution Time: 34.206 ms
+=== R08 run 3 ===
+GroupAggregate  (cost=5884.74..6046.92 rows=1167 width=52) (actual time=22.509..32.337 rows=24.00 loops=1)
+  Group Key: (date_trunc('month'::text, paid_at)), method
+  Buffers: shared hit=2366
+  ->  Gather Merge  (cost=5884.74..6017.74 rows=1167 width=18) (actual time=22.061..27.914 rows=77438.00 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=2366
+        ->  Sort  (cost=4884.73..4886.44 rows=686 width=18) (actual time=20.914..21.873 rows=38719.00 loops=2)
+              Sort Key: (date_trunc('month'::text, paid_at)), method
+              Sort Method: quicksort  Memory: 3077kB
+              Buffers: shared hit=2366
+              Worker 0:  Sort Method: quicksort  Memory: 3021kB
+              ->  Parallel Seq Scan on payments  (cost=0.00..4852.41 rows=686 width=18) (actual time=9.203..17.185 rows=38719.00 loops=2)
+                    Filter: (((payment_status)::text = 'SUCCESS'::text) AND (EXTRACT(year FROM paid_at) = '2026'::numeric))
+                    Rows Removed by Filter: 84200
+                    Buffers: shared hit=2320
+Planning:
+  Buffers: shared hit=146
+Planning Time: 0.262 ms
+Execution Time: 32.373 ms

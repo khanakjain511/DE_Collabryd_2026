@@ -1,0 +1,39 @@
+=== W05 run 1 ===
+Delete on trips  (cost=0.00..10425.24 rows=0 width=0) (actual time=37.428..37.430 rows=0.00 loops=1)
+  Buffers: shared hit=12408
+  ->  Seq Scan on trips  (cost=0.00..10425.24 rows=3216 width=6) (actual time=0.058..36.373 rows=3165.00 loops=1)
+        Filter: (((status)::text ~~ 'CANCELLED%'::text) AND (requested_at < '2025-02-01 00:00:00+05:30'::timestamp with time zone))
+        Rows Removed by Filter: 296835
+        Buffers: shared hit=5795
+Planning:
+  Buffers: shared hit=60
+Planning Time: 0.186 ms
+Trigger for constraint payments_trip_id_fkey: time=6.239 calls=3165
+Trigger for constraint ratings_trip_id_fkey: time=5.301 calls=3165
+Execution Time: 49.243 ms
+=== W05 run 2 ===
+Delete on trips  (cost=0.00..10425.24 rows=0 width=0) (actual time=29.396..29.397 rows=0.00 loops=1)
+  Buffers: shared hit=12130
+  ->  Seq Scan on trips  (cost=0.00..10425.24 rows=3216 width=6) (actual time=0.016..28.139 rows=3165.00 loops=1)
+        Filter: (((status)::text ~~ 'CANCELLED%'::text) AND (requested_at < '2025-02-01 00:00:00+05:30'::timestamp with time zone))
+        Rows Removed by Filter: 296835
+        Buffers: shared hit=5795
+Planning:
+  Buffers: shared hit=60
+Planning Time: 0.236 ms
+Trigger for constraint payments_trip_id_fkey: time=21.638 calls=3165
+Trigger for constraint ratings_trip_id_fkey: time=11.704 calls=3165
+Execution Time: 63.281 ms
+=== W05 run 3 ===
+Delete on trips  (cost=0.00..10425.24 rows=0 width=0) (actual time=51.366..51.366 rows=0.00 loops=1)
+  Buffers: shared hit=12130
+  ->  Seq Scan on trips  (cost=0.00..10425.24 rows=3216 width=6) (actual time=0.018..42.865 rows=3165.00 loops=1)
+        Filter: (((status)::text ~~ 'CANCELLED%'::text) AND (requested_at < '2025-02-01 00:00:00+05:30'::timestamp with time zone))
+        Rows Removed by Filter: 296835
+        Buffers: shared hit=5795
+Planning:
+  Buffers: shared hit=60
+Planning Time: 0.416 ms
+Trigger for constraint payments_trip_id_fkey: time=23.296 calls=3165
+Trigger for constraint ratings_trip_id_fkey: time=10.528 calls=3165
+Execution Time: 85.695 ms

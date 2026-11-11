@@ -1,0 +1,33 @@
+=== W04 run 1 ===
+Insert on trips  (cost=0.00..150.00 rows=0 width=0) (actual time=10.803..10.803 rows=0.00 loops=1)
+  Buffers: shared hit=12380 dirtied=73 written=44
+  ->  Function Scan on generate_series g  (cost=0.00..150.00 rows=5000 width=272) (actual time=0.766..1.608 rows=5000.00 loops=1)
+Planning Time: 0.120 ms
+Trigger for constraint trips_rider_id_fkey: time=32.265 calls=5000
+Trigger for constraint trips_driver_id_fkey: time=2.604 calls=5000
+Trigger for constraint trips_city_id_fkey: time=61.293 calls=5000
+Trigger for constraint trips_promo_code_fkey: time=3.251 calls=5000
+Trigger for constraint trips_vehicle_id_driver_id_fkey: time=1.820 calls=5000
+Execution Time: 113.193 ms
+=== W04 run 2 ===
+Insert on trips  (cost=0.00..150.00 rows=0 width=0) (actual time=24.200..24.200 rows=0.00 loops=1)
+  Buffers: shared hit=23840 dirtied=66 written=66
+  ->  Function Scan on generate_series g  (cost=0.00..150.00 rows=5000 width=272) (actual time=0.267..1.402 rows=5000.00 loops=1)
+Planning Time: 0.158 ms
+Trigger for constraint trips_rider_id_fkey: time=24.795 calls=5000
+Trigger for constraint trips_driver_id_fkey: time=2.154 calls=5000
+Trigger for constraint trips_city_id_fkey: time=19.324 calls=5000
+Trigger for constraint trips_promo_code_fkey: time=2.432 calls=5000
+Trigger for constraint trips_vehicle_id_driver_id_fkey: time=1.785 calls=5000
+Execution Time: 75.905 ms
+=== W04 run 3 ===
+Insert on trips  (cost=0.00..150.00 rows=0 width=0) (actual time=25.897..25.897 rows=0.00 loops=1)
+  Buffers: shared hit=22969 dirtied=67 written=67
+  ->  Function Scan on generate_series g  (cost=0.00..150.00 rows=5000 width=272) (actual time=0.277..2.291 rows=5000.00 loops=1)
+Planning Time: 0.088 ms
+Trigger for constraint trips_rider_id_fkey: time=21.364 calls=5000
+Trigger for constraint trips_driver_id_fkey: time=1.511 calls=5000
+Trigger for constraint trips_city_id_fkey: time=12.174 calls=5000
+Trigger for constraint trips_promo_code_fkey: time=1.607 calls=5000
+Trigger for constraint trips_vehicle_id_driver_id_fkey: time=1.445 calls=5000
+Execution Time: 64.817 ms
