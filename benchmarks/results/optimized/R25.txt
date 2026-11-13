@@ -1,0 +1,33 @@
+=== R25 run 1 ===
+Limit  (cost=0.28..4.53 rows=50 width=56) (actual time=0.322..0.338 rows=50.00 loops=1)
+  Buffers: shared hit=6 read=2
+  ->  Index Only Scan using trips_fare_per_km_round_idx on trips  (cost=0.28..6943.57 rows=81593 width=56) (actual time=0.321..0.334 rows=50.00 loops=1)
+        Heap Fetches: 5
+        Index Searches: 1
+        Buffers: shared hit=6 read=2
+Planning:
+  Buffers: shared hit=382
+Planning Time: 0.659 ms
+Execution Time: 0.350 ms
+=== R25 run 2 ===
+Limit  (cost=0.28..4.53 rows=50 width=56) (actual time=0.031..0.049 rows=50.00 loops=1)
+  Buffers: shared hit=8
+  ->  Index Only Scan using trips_fare_per_km_round_idx on trips  (cost=0.28..6943.57 rows=81593 width=56) (actual time=0.031..0.046 rows=50.00 loops=1)
+        Heap Fetches: 5
+        Index Searches: 1
+        Buffers: shared hit=8
+Planning:
+  Buffers: shared hit=380
+Planning Time: 0.657 ms
+Execution Time: 0.060 ms
+=== R25 run 3 ===
+Limit  (cost=0.28..4.53 rows=50 width=56) (actual time=0.030..0.045 rows=50.00 loops=1)
+  Buffers: shared hit=8
+  ->  Index Only Scan using trips_fare_per_km_round_idx on trips  (cost=0.28..6943.57 rows=81593 width=56) (actual time=0.030..0.044 rows=50.00 loops=1)
+        Heap Fetches: 5
+        Index Searches: 1
+        Buffers: shared hit=8
+Planning:
+  Buffers: shared hit=380
+Planning Time: 0.634 ms
+Execution Time: 0.058 ms

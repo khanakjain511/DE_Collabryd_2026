@@ -1,0 +1,102 @@
+=== R07 run 1 ===
+Limit  (cost=1500.18..1500.20 rows=10 width=56) (actual time=2.981..2.983 rows=10.00 loops=1)
+  Buffers: shared hit=2264
+  ->  Sort  (cost=1500.18..1507.68 rows=3000 width=56) (actual time=2.981..2.982 rows=10.00 loops=1)
+        Sort Key: (sum(t.fare_amount)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=2264
+        ->  HashAggregate  (cost=1397.85..1435.35 rows=3000 width=56) (actual time=2.866..2.928 rows=480.00 loops=1)
+              Group Key: d.driver_id
+              Batches: 1  Memory Usage: 369kB
+              Buffers: shared hit=2261
+              ->  Nested Loop  (cost=1.56..1367.69 rows=4021 width=22) (actual time=0.022..2.367 rows=6597.00 loops=1)
+                    Buffers: shared hit=2261
+                    ->  Hash Join  (cost=1.14..79.35 rows=300 width=16) (actual time=0.015..0.267 rows=480.00 loops=1)
+                          Hash Cond: (d.city_id = c.city_id)
+                          Buffers: shared hit=38
+                          ->  Seq Scan on drivers d  (cost=0.00..67.00 rows=3000 width=20) (actual time=0.005..0.119 rows=3000.00 loops=1)
+                                Buffers: shared hit=37
+                          ->  Hash  (cost=1.12..1.12 rows=1 width=4) (actual time=0.005..0.005 rows=1.00 loops=1)
+                                Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                Buffers: shared hit=1
+                                ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.003..0.003 rows=1.00 loops=1)
+                                      Filter: ((city_name)::text = 'Mumbai'::text)
+                                      Rows Removed by Filter: 9
+                                      Buffers: shared hit=1
+                    ->  Index Only Scan using trips_driver_requested_completed_idx on trips t  (cost=0.42..4.16 rows=13 width=10) (actual time=0.002..0.004 rows=13.74 loops=480)
+                          Index Cond: ((driver_id = d.driver_id) AND (requested_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-04-01 00:00:00+05:30'::timestamp with time zone))
+                          Heap Fetches: 754
+                          Index Searches: 480
+                          Buffers: shared hit=2223
+Planning:
+  Buffers: shared hit=558
+Planning Time: 1.130 ms
+Execution Time: 3.049 ms
+=== R07 run 2 ===
+Limit  (cost=1500.18..1500.20 rows=10 width=56) (actual time=2.480..2.482 rows=10.00 loops=1)
+  Buffers: shared hit=2264
+  ->  Sort  (cost=1500.18..1507.68 rows=3000 width=56) (actual time=2.479..2.480 rows=10.00 loops=1)
+        Sort Key: (sum(t.fare_amount)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=2264
+        ->  HashAggregate  (cost=1397.85..1435.35 rows=3000 width=56) (actual time=2.370..2.430 rows=480.00 loops=1)
+              Group Key: d.driver_id
+              Batches: 1  Memory Usage: 369kB
+              Buffers: shared hit=2261
+              ->  Nested Loop  (cost=1.56..1367.69 rows=4021 width=22) (actual time=0.020..1.853 rows=6597.00 loops=1)
+                    Buffers: shared hit=2261
+                    ->  Hash Join  (cost=1.14..79.35 rows=300 width=16) (actual time=0.013..0.235 rows=480.00 loops=1)
+                          Hash Cond: (d.city_id = c.city_id)
+                          Buffers: shared hit=38
+                          ->  Seq Scan on drivers d  (cost=0.00..67.00 rows=3000 width=20) (actual time=0.003..0.087 rows=3000.00 loops=1)
+                                Buffers: shared hit=37
+                          ->  Hash  (cost=1.12..1.12 rows=1 width=4) (actual time=0.005..0.005 rows=1.00 loops=1)
+                                Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                Buffers: shared hit=1
+                                ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.003..0.003 rows=1.00 loops=1)
+                                      Filter: ((city_name)::text = 'Mumbai'::text)
+                                      Rows Removed by Filter: 9
+                                      Buffers: shared hit=1
+                    ->  Index Only Scan using trips_driver_requested_completed_idx on trips t  (cost=0.42..4.16 rows=13 width=10) (actual time=0.002..0.003 rows=13.74 loops=480)
+                          Index Cond: ((driver_id = d.driver_id) AND (requested_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-04-01 00:00:00+05:30'::timestamp with time zone))
+                          Heap Fetches: 754
+                          Index Searches: 480
+                          Buffers: shared hit=2223
+Planning:
+  Buffers: shared hit=556
+Planning Time: 1.044 ms
+Execution Time: 2.550 ms
+=== R07 run 3 ===
+Limit  (cost=1500.18..1500.20 rows=10 width=56) (actual time=2.802..2.804 rows=10.00 loops=1)
+  Buffers: shared hit=2264
+  ->  Sort  (cost=1500.18..1507.68 rows=3000 width=56) (actual time=2.801..2.803 rows=10.00 loops=1)
+        Sort Key: (sum(t.fare_amount)) DESC
+        Sort Method: top-N heapsort  Memory: 26kB
+        Buffers: shared hit=2264
+        ->  HashAggregate  (cost=1397.85..1435.35 rows=3000 width=56) (actual time=2.689..2.748 rows=480.00 loops=1)
+              Group Key: d.driver_id
+              Batches: 1  Memory Usage: 369kB
+              Buffers: shared hit=2261
+              ->  Nested Loop  (cost=1.56..1367.69 rows=4021 width=22) (actual time=0.020..2.084 rows=6597.00 loops=1)
+                    Buffers: shared hit=2261
+                    ->  Hash Join  (cost=1.14..79.35 rows=300 width=16) (actual time=0.013..0.296 rows=480.00 loops=1)
+                          Hash Cond: (d.city_id = c.city_id)
+                          Buffers: shared hit=38
+                          ->  Seq Scan on drivers d  (cost=0.00..67.00 rows=3000 width=20) (actual time=0.003..0.101 rows=3000.00 loops=1)
+                                Buffers: shared hit=37
+                          ->  Hash  (cost=1.12..1.12 rows=1 width=4) (actual time=0.005..0.005 rows=1.00 loops=1)
+                                Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                Buffers: shared hit=1
+                                ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.003..0.003 rows=1.00 loops=1)
+                                      Filter: ((city_name)::text = 'Mumbai'::text)
+                                      Rows Removed by Filter: 9
+                                      Buffers: shared hit=1
+                    ->  Index Only Scan using trips_driver_requested_completed_idx on trips t  (cost=0.42..4.16 rows=13 width=10) (actual time=0.002..0.003 rows=13.74 loops=480)
+                          Index Cond: ((driver_id = d.driver_id) AND (requested_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-04-01 00:00:00+05:30'::timestamp with time zone))
+                          Heap Fetches: 754
+                          Index Searches: 480
+                          Buffers: shared hit=2223
+Planning:
+  Buffers: shared hit=556
+Planning Time: 1.057 ms
+Execution Time: 2.865 ms

@@ -1,0 +1,69 @@
+=== R10 run 1 ===
+Hash Right Anti Join  (cost=222.70..5709.73 rows=1 width=20) (actual time=1.901..1.954 rows=978.00 loops=1)
+  Hash Cond: (t.driver_id = d.driver_id)
+  Buffers: shared hit=379
+  ->  Bitmap Heap Scan on trips t  (cost=114.35..5552.76 rows=3536 width=4) (actual time=0.587..1.289 rows=3296.00 loops=1)
+        Recheck Cond: (requested_at >= '2026-06-25 00:00:00+05:30'::timestamp with time zone)
+        Heap Blocks: exact=262
+        Buffers: shared hit=342
+        ->  Bitmap Index Scan on trips_status_requested_idx  (cost=0.00..113.47 rows=3536 width=0) (actual time=0.560..0.560 rows=18302.00 loops=1)
+              Index Cond: (requested_at >= '2026-06-25 00:00:00+05:30'::timestamp with time zone)
+              Index Searches: 4
+              Buffers: shared hit=80
+  ->  Hash  (cost=74.50..74.50 rows=2708 width=20) (actual time=0.410..0.410 rows=2708.00 loops=1)
+        Buckets: 4096  Batches: 1  Memory Usage: 174kB
+        Buffers: shared hit=37
+        ->  Seq Scan on drivers d  (cost=0.00..74.50 rows=2708 width=20) (actual time=0.005..0.199 rows=2708.00 loops=1)
+              Filter: ((status)::text = 'ACTIVE'::text)
+              Rows Removed by Filter: 292
+              Buffers: shared hit=37
+Planning:
+  Buffers: shared hit=554
+Planning Time: 1.057 ms
+Execution Time: 2.008 ms
+=== R10 run 2 ===
+Hash Right Anti Join  (cost=222.70..5709.73 rows=1 width=20) (actual time=1.341..1.393 rows=978.00 loops=1)
+  Hash Cond: (t.driver_id = d.driver_id)
+  Buffers: shared hit=379
+  ->  Bitmap Heap Scan on trips t  (cost=114.35..5552.76 rows=3536 width=4) (actual time=0.334..0.814 rows=3296.00 loops=1)
+        Recheck Cond: (requested_at >= '2026-06-25 00:00:00+05:30'::timestamp with time zone)
+        Heap Blocks: exact=262
+        Buffers: shared hit=342
+        ->  Bitmap Index Scan on trips_status_requested_idx  (cost=0.00..113.47 rows=3536 width=0) (actual time=0.316..0.316 rows=18302.00 loops=1)
+              Index Cond: (requested_at >= '2026-06-25 00:00:00+05:30'::timestamp with time zone)
+              Index Searches: 4
+              Buffers: shared hit=80
+  ->  Hash  (cost=74.50..74.50 rows=2708 width=20) (actual time=0.345..0.345 rows=2708.00 loops=1)
+        Buckets: 4096  Batches: 1  Memory Usage: 174kB
+        Buffers: shared hit=37
+        ->  Seq Scan on drivers d  (cost=0.00..74.50 rows=2708 width=20) (actual time=0.004..0.197 rows=2708.00 loops=1)
+              Filter: ((status)::text = 'ACTIVE'::text)
+              Rows Removed by Filter: 292
+              Buffers: shared hit=37
+Planning:
+  Buffers: shared hit=552
+Planning Time: 0.895 ms
+Execution Time: 1.433 ms
+=== R10 run 3 ===
+Hash Right Anti Join  (cost=222.70..5709.73 rows=1 width=20) (actual time=1.512..1.567 rows=978.00 loops=1)
+  Hash Cond: (t.driver_id = d.driver_id)
+  Buffers: shared hit=379
+  ->  Bitmap Heap Scan on trips t  (cost=114.35..5552.76 rows=3536 width=4) (actual time=0.448..0.959 rows=3296.00 loops=1)
+        Recheck Cond: (requested_at >= '2026-06-25 00:00:00+05:30'::timestamp with time zone)
+        Heap Blocks: exact=262
+        Buffers: shared hit=342
+        ->  Bitmap Index Scan on trips_status_requested_idx  (cost=0.00..113.47 rows=3536 width=0) (actual time=0.428..0.428 rows=18302.00 loops=1)
+              Index Cond: (requested_at >= '2026-06-25 00:00:00+05:30'::timestamp with time zone)
+              Index Searches: 4
+              Buffers: shared hit=80
+  ->  Hash  (cost=74.50..74.50 rows=2708 width=20) (actual time=0.349..0.349 rows=2708.00 loops=1)
+        Buckets: 4096  Batches: 1  Memory Usage: 174kB
+        Buffers: shared hit=37
+        ->  Seq Scan on drivers d  (cost=0.00..74.50 rows=2708 width=20) (actual time=0.006..0.203 rows=2708.00 loops=1)
+              Filter: ((status)::text = 'ACTIVE'::text)
+              Rows Removed by Filter: 292
+              Buffers: shared hit=37
+Planning:
+  Buffers: shared hit=552
+Planning Time: 2.341 ms
+Execution Time: 1.671 ms

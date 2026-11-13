@@ -1,0 +1,114 @@
+=== R17 run 1 ===
+Sort  (cost=9967.07..9967.09 rows=10 width=55) (actual time=26.631..27.631 rows=10.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE ((t.status)::text ~~ 'CANCELLED%'::text)))::numeric) / (count(*))::numeric), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=6017
+  ->  Finalize GroupAggregate  (cost=9963.70..9966.90 rows=10 width=55) (actual time=26.608..27.619 rows=10.00 loops=1)
+        Group Key: c.city_name
+        Buffers: shared hit=6014
+        ->  Gather Merge  (cost=9963.70..9966.50 rows=24 width=23) (actual time=26.583..27.592 rows=30.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=6014
+              ->  Sort  (cost=8963.68..8963.70 rows=10 width=23) (actual time=24.652..24.654 rows=10.00 loops=3)
+                    Sort Key: c.city_name
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=6014
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=8963.41..8963.51 rows=10 width=23) (actual time=23.561..23.564 rows=10.00 loops=3)
+                          Group Key: c.city_name
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=5998
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Hash Join  (cost=1.23..7713.41 rows=125000 width=18) (actual time=0.051..14.843 rows=100000.00 loops=3)
+                                Hash Cond: (t.city_id = c.city_id)
+                                Buffers: shared hit=5998
+                                ->  Parallel Seq Scan on trips t  (cost=0.00..7245.00 rows=125000 width=15) (actual time=0.028..3.974 rows=100000.00 loops=3)
+                                      Buffers: shared hit=5995
+                                ->  Hash  (cost=1.10..1.10 rows=10 width=11) (actual time=0.019..0.019 rows=10.00 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=3
+                                      ->  Seq Scan on cities c  (cost=0.00..1.10 rows=10 width=11) (actual time=0.015..0.015 rows=10.00 loops=3)
+                                            Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=518
+Planning Time: 0.782 ms
+Execution Time: 27.725 ms
+=== R17 run 2 ===
+Sort  (cost=9967.07..9967.09 rows=10 width=55) (actual time=33.192..34.213 rows=10.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE ((t.status)::text ~~ 'CANCELLED%'::text)))::numeric) / (count(*))::numeric), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=6017
+  ->  Finalize GroupAggregate  (cost=9963.70..9966.90 rows=10 width=55) (actual time=33.178..34.206 rows=10.00 loops=1)
+        Group Key: c.city_name
+        Buffers: shared hit=6014
+        ->  Gather Merge  (cost=9963.70..9966.50 rows=24 width=23) (actual time=33.158..34.185 rows=30.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=6014
+              ->  Sort  (cost=8963.68..8963.70 rows=10 width=23) (actual time=29.878..29.879 rows=10.00 loops=3)
+                    Sort Key: c.city_name
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=6014
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=8963.41..8963.51 rows=10 width=23) (actual time=29.857..29.858 rows=10.00 loops=3)
+                          Group Key: c.city_name
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=5998
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Hash Join  (cost=1.23..7713.41 rows=125000 width=18) (actual time=0.030..17.010 rows=100000.00 loops=3)
+                                Hash Cond: (t.city_id = c.city_id)
+                                Buffers: shared hit=5998
+                                ->  Parallel Seq Scan on trips t  (cost=0.00..7245.00 rows=125000 width=15) (actual time=0.006..4.669 rows=100000.00 loops=3)
+                                      Buffers: shared hit=5995
+                                ->  Hash  (cost=1.10..1.10 rows=10 width=11) (actual time=0.020..0.020 rows=10.00 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=3
+                                      ->  Seq Scan on cities c  (cost=0.00..1.10 rows=10 width=11) (actual time=0.016..0.017 rows=10.00 loops=3)
+                                            Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=518
+Planning Time: 0.786 ms
+Execution Time: 34.270 ms
+=== R17 run 3 ===
+Sort  (cost=9967.07..9967.09 rows=10 width=55) (actual time=64.483..67.019 rows=10.00 loops=1)
+  Sort Key: (round(((100.0 * (count(*) FILTER (WHERE ((t.status)::text ~~ 'CANCELLED%'::text)))::numeric) / (count(*))::numeric), 2)) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=6017
+  ->  Finalize GroupAggregate  (cost=9963.70..9966.90 rows=10 width=55) (actual time=64.278..66.916 rows=10.00 loops=1)
+        Group Key: c.city_name
+        Buffers: shared hit=6014
+        ->  Gather Merge  (cost=9963.70..9966.50 rows=24 width=23) (actual time=64.262..66.808 rows=30.00 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=6014
+              ->  Sort  (cost=8963.68..8963.70 rows=10 width=23) (actual time=60.163..60.164 rows=10.00 loops=3)
+                    Sort Key: c.city_name
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=6014
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=8963.41..8963.51 rows=10 width=23) (actual time=60.121..60.123 rows=10.00 loops=3)
+                          Group Key: c.city_name
+                          Batches: 1  Memory Usage: 32kB
+                          Buffers: shared hit=5998
+                          Worker 0:  Batches: 1  Memory Usage: 32kB
+                          Worker 1:  Batches: 1  Memory Usage: 32kB
+                          ->  Hash Join  (cost=1.23..7713.41 rows=125000 width=18) (actual time=0.099..35.484 rows=100000.00 loops=3)
+                                Hash Cond: (t.city_id = c.city_id)
+                                Buffers: shared hit=5998
+                                ->  Parallel Seq Scan on trips t  (cost=0.00..7245.00 rows=125000 width=15) (actual time=0.020..13.117 rows=100000.00 loops=3)
+                                      Buffers: shared hit=5995
+                                ->  Hash  (cost=1.10..1.10 rows=10 width=11) (actual time=0.070..0.070 rows=10.00 loops=3)
+                                      Buckets: 1024  Batches: 1  Memory Usage: 9kB
+                                      Buffers: shared hit=3
+                                      ->  Seq Scan on cities c  (cost=0.00..1.10 rows=10 width=11) (actual time=0.064..0.065 rows=10.00 loops=3)
+                                            Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=518
+Planning Time: 0.818 ms
+Execution Time: 67.112 ms

@@ -1,0 +1,63 @@
+=== R20 run 1 ===
+WindowAgg  (cost=1639.38..2167.19 rows=14076 width=68) (actual time=1.729..2.537 rows=31.00 loops=1)
+  Window: w1 AS (ORDER BY ((trips.requested_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=102
+  ->  GroupAggregate  (cost=1639.34..1956.05 rows=14076 width=36) (actual time=1.693..2.520 rows=31.00 loops=1)
+        Group Key: ((trips.requested_at)::date)
+        Buffers: shared hit=102
+        ->  Sort  (cost=1639.34..1674.53 rows=14076 width=10) (actual time=1.658..1.919 rows=14001.00 loops=1)
+              Sort Key: ((trips.requested_at)::date)
+              Sort Method: quicksort  Memory: 822kB
+              Buffers: shared hit=102
+              ->  Index Only Scan using trips_completed_requested_idx on trips  (cost=0.42..669.44 rows=14076 width=10) (actual time=0.038..1.180 rows=14001.00 loops=1)
+                    Index Cond: ((requested_at >= '2026-05-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-06-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 1114
+                    Index Searches: 1
+                    Buffers: shared hit=99
+Planning:
+  Buffers: shared hit=451
+Planning Time: 0.803 ms
+Execution Time: 2.574 ms
+=== R20 run 2 ===
+WindowAgg  (cost=1639.38..2167.19 rows=14076 width=68) (actual time=1.728..2.540 rows=31.00 loops=1)
+  Window: w1 AS (ORDER BY ((trips.requested_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=102
+  ->  GroupAggregate  (cost=1639.34..1956.05 rows=14076 width=36) (actual time=1.692..2.523 rows=31.00 loops=1)
+        Group Key: ((trips.requested_at)::date)
+        Buffers: shared hit=102
+        ->  Sort  (cost=1639.34..1674.53 rows=14076 width=10) (actual time=1.656..1.919 rows=14001.00 loops=1)
+              Sort Key: ((trips.requested_at)::date)
+              Sort Method: quicksort  Memory: 822kB
+              Buffers: shared hit=102
+              ->  Index Only Scan using trips_completed_requested_idx on trips  (cost=0.42..669.44 rows=14076 width=10) (actual time=0.039..1.180 rows=14001.00 loops=1)
+                    Index Cond: ((requested_at >= '2026-05-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-06-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 1114
+                    Index Searches: 1
+                    Buffers: shared hit=99
+Planning:
+  Buffers: shared hit=451
+Planning Time: 0.902 ms
+Execution Time: 2.580 ms
+=== R20 run 3 ===
+WindowAgg  (cost=1639.38..2167.19 rows=14076 width=68) (actual time=1.747..2.556 rows=31.00 loops=1)
+  Window: w1 AS (ORDER BY ((trips.requested_at)::date))
+  Storage: Memory  Maximum Storage: 17kB
+  Buffers: shared hit=102
+  ->  GroupAggregate  (cost=1639.34..1956.05 rows=14076 width=36) (actual time=1.708..2.537 rows=31.00 loops=1)
+        Group Key: ((trips.requested_at)::date)
+        Buffers: shared hit=102
+        ->  Sort  (cost=1639.34..1674.53 rows=14076 width=10) (actual time=1.673..1.936 rows=14001.00 loops=1)
+              Sort Key: ((trips.requested_at)::date)
+              Sort Method: quicksort  Memory: 822kB
+              Buffers: shared hit=102
+              ->  Index Only Scan using trips_completed_requested_idx on trips  (cost=0.42..669.44 rows=14076 width=10) (actual time=0.037..1.189 rows=14001.00 loops=1)
+                    Index Cond: ((requested_at >= '2026-05-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-06-01 00:00:00+05:30'::timestamp with time zone))
+                    Heap Fetches: 1114
+                    Index Searches: 1
+                    Buffers: shared hit=99
+Planning:
+  Buffers: shared hit=451
+Planning Time: 0.693 ms
+Execution Time: 2.598 ms

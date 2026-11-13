@@ -1,0 +1,33 @@
+=== R24 run 1 ===
+Limit  (cost=0.28..80.16 rows=100 width=26) (actual time=0.038..0.101 rows=100.00 loops=1)
+  Buffers: shared hit=26
+  ->  Index Only Scan using trips_long_completed_idx on trips  (cost=0.28..2014.09 rows=2521 width=26) (actual time=0.038..0.097 rows=100.00 loops=1)
+        Heap Fetches: 24
+        Index Searches: 1
+        Buffers: shared hit=26
+Planning:
+  Buffers: shared hit=391
+Planning Time: 1.277 ms
+Execution Time: 0.118 ms
+=== R24 run 2 ===
+Limit  (cost=0.28..80.16 rows=100 width=26) (actual time=0.036..0.086 rows=100.00 loops=1)
+  Buffers: shared hit=26
+  ->  Index Only Scan using trips_long_completed_idx on trips  (cost=0.28..2014.09 rows=2521 width=26) (actual time=0.036..0.083 rows=100.00 loops=1)
+        Heap Fetches: 24
+        Index Searches: 1
+        Buffers: shared hit=26
+Planning:
+  Buffers: shared hit=391
+Planning Time: 0.705 ms
+Execution Time: 0.119 ms
+=== R24 run 3 ===
+Limit  (cost=0.28..80.16 rows=100 width=26) (actual time=0.032..0.092 rows=100.00 loops=1)
+  Buffers: shared hit=26
+  ->  Index Only Scan using trips_long_completed_idx on trips  (cost=0.28..2014.09 rows=2521 width=26) (actual time=0.032..0.088 rows=100.00 loops=1)
+        Heap Fetches: 24
+        Index Searches: 1
+        Buffers: shared hit=26
+Planning:
+  Buffers: shared hit=391
+Planning Time: 0.962 ms
+Execution Time: 0.104 ms
