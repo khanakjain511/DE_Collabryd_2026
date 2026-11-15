@@ -1,0 +1,57 @@
+=== W05 run 1 ===
+Delete on trips  (cost=442.27..7110.81 rows=0 width=0) (actual time=8.251..8.252 rows=0.00 loops=1)
+  Buffers: shared hit=6716 read=59 dirtied=318
+  ->  Bitmap Heap Scan on trips  (cost=442.27..7110.81 rows=3334 width=6) (actual time=1.005..2.836 rows=3165.00 loops=1)
+        Recheck Cond: (requested_at < '2025-02-01 00:00:00+05:30'::timestamp with time zone)
+        Filter: ((status)::text ~~ 'CANCELLED%'::text)
+        Rows Removed by Filter: 13868
+        Heap Blocks: exact=318
+        Buffers: shared hit=379 read=59
+        ->  Bitmap Index Scan on trips_city_requested_idx  (cost=0.00..441.43 rows=18236 width=0) (actual time=0.979..0.979 rows=17033.00 loops=1)
+              Index Cond: (requested_at < '2025-02-01 00:00:00+05:30'::timestamp with time zone)
+              Index Searches: 11
+              Buffers: shared hit=61 read=59
+Planning:
+  Buffers: shared hit=360 read=4
+Planning Time: 1.124 ms
+Trigger for constraint payments_trip_id_fkey: time=8.458 calls=3165
+Trigger for constraint ratings_trip_id_fkey: time=7.456 calls=3165
+Execution Time: 24.498 ms
+=== W05 run 2 ===
+Delete on trips  (cost=442.27..7110.81 rows=0 width=0) (actual time=2.956..2.956 rows=0.00 loops=1)
+  Buffers: shared hit=6775
+  ->  Bitmap Heap Scan on trips  (cost=442.27..7110.81 rows=3334 width=6) (actual time=0.423..2.093 rows=3165.00 loops=1)
+        Recheck Cond: (requested_at < '2025-02-01 00:00:00+05:30'::timestamp with time zone)
+        Filter: ((status)::text ~~ 'CANCELLED%'::text)
+        Rows Removed by Filter: 13868
+        Heap Blocks: exact=318
+        Buffers: shared hit=438
+        ->  Bitmap Index Scan on trips_city_requested_idx  (cost=0.00..441.43 rows=18236 width=0) (actual time=0.396..0.397 rows=17033.00 loops=1)
+              Index Cond: (requested_at < '2025-02-01 00:00:00+05:30'::timestamp with time zone)
+              Index Searches: 11
+              Buffers: shared hit=120
+Planning:
+  Buffers: shared hit=364
+Planning Time: 0.630 ms
+Trigger for constraint payments_trip_id_fkey: time=5.305 calls=3165
+Trigger for constraint ratings_trip_id_fkey: time=4.978 calls=3165
+Execution Time: 13.497 ms
+=== W05 run 3 ===
+Delete on trips  (cost=442.27..7110.81 rows=0 width=0) (actual time=3.164..3.164 rows=0.00 loops=1)
+  Buffers: shared hit=6775
+  ->  Bitmap Heap Scan on trips  (cost=442.27..7110.81 rows=3334 width=6) (actual time=0.450..2.245 rows=3165.00 loops=1)
+        Recheck Cond: (requested_at < '2025-02-01 00:00:00+05:30'::timestamp with time zone)
+        Filter: ((status)::text ~~ 'CANCELLED%'::text)
+        Rows Removed by Filter: 13868
+        Heap Blocks: exact=318
+        Buffers: shared hit=438
+        ->  Bitmap Index Scan on trips_city_requested_idx  (cost=0.00..441.43 rows=18236 width=0) (actual time=0.423..0.423 rows=17033.00 loops=1)
+              Index Cond: (requested_at < '2025-02-01 00:00:00+05:30'::timestamp with time zone)
+              Index Searches: 11
+              Buffers: shared hit=120
+Planning:
+  Buffers: shared hit=364
+Planning Time: 0.701 ms
+Trigger for constraint payments_trip_id_fkey: time=5.224 calls=3165
+Trigger for constraint ratings_trip_id_fkey: time=4.762 calls=3165
+Execution Time: 13.382 ms

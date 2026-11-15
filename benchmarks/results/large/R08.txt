@@ -1,0 +1,51 @@
+=== R08 run 1 ===
+GroupAggregate  (cost=10421.61..12531.83 rows=76688 width=52) (actual time=27.087..33.683 rows=24.00 loops=1)
+  Group Key: (date_trunc('month'::text, paid_at)), method
+  Buffers: shared hit=6 read=557, temp read=283 written=284
+  ->  Sort  (cost=10421.61..10613.59 rows=76792 width=18) (actual time=26.793..29.283 rows=77438.00 loops=1)
+        Sort Key: (date_trunc('month'::text, paid_at)), method
+        Sort Method: external merge  Disk: 2264kB
+        Buffers: shared hit=6 read=557, temp read=283 written=284
+        ->  Index Only Scan using payments_status_paid_at_idx on payments  (cost=0.42..4190.45 rows=76792 width=18) (actual time=0.658..15.675 rows=77438.00 loops=1)
+              Index Cond: ((payment_status = 'SUCCESS'::text) AND (paid_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (paid_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone))
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared read=557
+Planning:
+  Buffers: shared hit=185
+Planning Time: 0.345 ms
+Execution Time: 34.204 ms
+=== R08 run 2 ===
+GroupAggregate  (cost=10421.61..12531.83 rows=76688 width=52) (actual time=22.891..29.478 rows=24.00 loops=1)
+  Group Key: (date_trunc('month'::text, paid_at)), method
+  Buffers: shared hit=563, temp read=283 written=284
+  ->  Sort  (cost=10421.61..10613.59 rows=76792 width=18) (actual time=22.586..25.056 rows=77438.00 loops=1)
+        Sort Key: (date_trunc('month'::text, paid_at)), method
+        Sort Method: external merge  Disk: 2264kB
+        Buffers: shared hit=563, temp read=283 written=284
+        ->  Index Only Scan using payments_status_paid_at_idx on payments  (cost=0.42..4190.45 rows=76792 width=18) (actual time=0.111..9.324 rows=77438.00 loops=1)
+              Index Cond: ((payment_status = 'SUCCESS'::text) AND (paid_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (paid_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone))
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=557
+Planning:
+  Buffers: shared hit=185
+Planning Time: 0.739 ms
+Execution Time: 30.243 ms
+=== R08 run 3 ===
+GroupAggregate  (cost=10421.61..12531.83 rows=76688 width=52) (actual time=19.373..30.520 rows=24.00 loops=1)
+  Group Key: (date_trunc('month'::text, paid_at)), method
+  Buffers: shared hit=563, temp read=283 written=284
+  ->  Sort  (cost=10421.61..10613.59 rows=76792 width=18) (actual time=19.059..22.886 rows=77438.00 loops=1)
+        Sort Key: (date_trunc('month'::text, paid_at)), method
+        Sort Method: external merge  Disk: 2264kB
+        Buffers: shared hit=563, temp read=283 written=284
+        ->  Index Only Scan using payments_status_paid_at_idx on payments  (cost=0.42..4190.45 rows=76792 width=18) (actual time=0.040..8.598 rows=77438.00 loops=1)
+              Index Cond: ((payment_status = 'SUCCESS'::text) AND (paid_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone) AND (paid_at < '2027-01-01 00:00:00+05:30'::timestamp with time zone))
+              Heap Fetches: 0
+              Index Searches: 1
+              Buffers: shared hit=557
+Planning:
+  Buffers: shared hit=185
+Planning Time: 0.308 ms
+Execution Time: 31.170 ms

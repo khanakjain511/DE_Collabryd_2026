@@ -1,0 +1,36 @@
+=== R02 run 1 ===
+GroupAggregate  (cost=0.42..12.54 rows=1 width=44) (actual time=0.433..0.434 rows=1.00 loops=1)
+  Buffers: shared read=4
+  ->  Index Only Scan using trips_driver_requested_completed_idx on trips  (cost=0.42..12.51 rows=4 width=10) (actual time=0.417..0.418 rows=5.00 loops=1)
+        Index Cond: ((driver_id = 217) AND (requested_at >= '2026-03-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-04-01 00:00:00+05:30'::timestamp with time zone))
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared read=4
+Planning:
+  Buffers: shared hit=429
+Planning Time: 0.841 ms
+Execution Time: 0.463 ms
+=== R02 run 2 ===
+GroupAggregate  (cost=0.42..12.54 rows=1 width=44) (actual time=0.036..0.037 rows=1.00 loops=1)
+  Buffers: shared hit=4
+  ->  Index Only Scan using trips_driver_requested_completed_idx on trips  (cost=0.42..12.51 rows=4 width=10) (actual time=0.030..0.031 rows=5.00 loops=1)
+        Index Cond: ((driver_id = 217) AND (requested_at >= '2026-03-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-04-01 00:00:00+05:30'::timestamp with time zone))
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=429
+Planning Time: 0.656 ms
+Execution Time: 0.055 ms
+=== R02 run 3 ===
+GroupAggregate  (cost=0.42..12.54 rows=1 width=44) (actual time=0.040..0.040 rows=1.00 loops=1)
+  Buffers: shared hit=4
+  ->  Index Only Scan using trips_driver_requested_completed_idx on trips  (cost=0.42..12.51 rows=4 width=10) (actual time=0.034..0.034 rows=5.00 loops=1)
+        Index Cond: ((driver_id = 217) AND (requested_at >= '2026-03-01 00:00:00+05:30'::timestamp with time zone) AND (requested_at < '2026-04-01 00:00:00+05:30'::timestamp with time zone))
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=429
+Planning Time: 0.702 ms
+Execution Time: 0.059 ms

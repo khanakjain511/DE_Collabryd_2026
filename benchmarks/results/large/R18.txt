@@ -1,0 +1,84 @@
+=== R18 run 1 ===
+Sort  (cost=5182.53..5188.53 rows=2400 width=24) (actual time=35.637..35.696 rows=2400.00 loops=1)
+  Sort Key: ((SubPlan 2)) DESC NULLS LAST
+  Sort Method: quicksort  Memory: 194kB
+  Buffers: shared hit=7904 read=1153 dirtied=260 written=450
+  ->  Bitmap Heap Scan on riders r  (cost=30.89..5047.78 rows=2400 width=24) (actual time=0.739..35.253 rows=2400.00 loops=1)
+        Recheck Cond: (home_city_id = 6)
+        Heap Blocks: exact=373
+        Buffers: shared hit=7901 read=1153 dirtied=260 written=450
+        ->  Bitmap Index Scan on riders_city_idx  (cost=0.00..30.29 rows=2400 width=0) (actual time=0.641..0.641 rows=2400.00 loops=1)
+              Index Cond: (home_city_id = 6)
+              Index Searches: 1
+              Buffers: shared hit=1 read=3
+        SubPlan 2
+          ->  Result  (cost=1.89..1.90 rows=1 width=8) (actual time=0.014..0.014 rows=1.00 loops=2400)
+                Buffers: shared hit=7527 read=1150 dirtied=260 written=450
+                InitPlan 1
+                  ->  Limit  (cost=0.42..1.89 rows=1 width=8) (actual time=0.014..0.014 rows=1.00 loops=2400)
+                        Buffers: shared hit=7527 read=1150 dirtied=260 written=450
+                        ->  Index Only Scan using trips_rider_requested_idx on trips t  (cost=0.42..16.61 rows=11 width=8) (actual time=0.013..0.013 rows=1.00 loops=2400)
+                              Index Cond: (rider_id = r.rider_id)
+                              Heap Fetches: 1476
+                              Index Searches: 2400
+                              Buffers: shared hit=7527 read=1150 written=450
+Planning:
+  Buffers: shared hit=491
+Planning Time: 1.128 ms
+Execution Time: 35.818 ms
+=== R18 run 2 ===
+Sort  (cost=5182.53..5188.53 rows=2400 width=24) (actual time=6.613..6.678 rows=2400.00 loops=1)
+  Sort Key: ((SubPlan 2)) DESC NULLS LAST
+  Sort Method: quicksort  Memory: 194kB
+  Buffers: shared hit=7856
+  ->  Bitmap Heap Scan on riders r  (cost=30.89..5047.78 rows=2400 width=24) (actual time=0.210..6.280 rows=2400.00 loops=1)
+        Recheck Cond: (home_city_id = 6)
+        Heap Blocks: exact=373
+        Buffers: shared hit=7853
+        ->  Bitmap Index Scan on riders_city_idx  (cost=0.00..30.29 rows=2400 width=0) (actual time=0.085..0.085 rows=2400.00 loops=1)
+              Index Cond: (home_city_id = 6)
+              Index Searches: 1
+              Buffers: shared hit=4
+        SubPlan 2
+          ->  Result  (cost=1.89..1.90 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=2400)
+                Buffers: shared hit=7476
+                InitPlan 1
+                  ->  Limit  (cost=0.42..1.89 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=2400)
+                        Buffers: shared hit=7476
+                        ->  Index Only Scan using trips_rider_requested_idx on trips t  (cost=0.42..16.61 rows=11 width=8) (actual time=0.002..0.002 rows=1.00 loops=2400)
+                              Index Cond: (rider_id = r.rider_id)
+                              Heap Fetches: 275
+                              Index Searches: 2400
+                              Buffers: shared hit=7476
+Planning:
+  Buffers: shared hit=491
+Planning Time: 1.500 ms
+Execution Time: 6.743 ms
+=== R18 run 3 ===
+Sort  (cost=5182.53..5188.53 rows=2400 width=24) (actual time=4.677..4.737 rows=2400.00 loops=1)
+  Sort Key: ((SubPlan 2)) DESC NULLS LAST
+  Sort Method: quicksort  Memory: 194kB
+  Buffers: shared hit=7856
+  ->  Bitmap Heap Scan on riders r  (cost=30.89..5047.78 rows=2400 width=24) (actual time=0.098..4.397 rows=2400.00 loops=1)
+        Recheck Cond: (home_city_id = 6)
+        Heap Blocks: exact=373
+        Buffers: shared hit=7853
+        ->  Bitmap Index Scan on riders_city_idx  (cost=0.00..30.29 rows=2400 width=0) (actual time=0.041..0.041 rows=2400.00 loops=1)
+              Index Cond: (home_city_id = 6)
+              Index Searches: 1
+              Buffers: shared hit=4
+        SubPlan 2
+          ->  Result  (cost=1.89..1.90 rows=1 width=8) (actual time=0.002..0.002 rows=1.00 loops=2400)
+                Buffers: shared hit=7476
+                InitPlan 1
+                  ->  Limit  (cost=0.42..1.89 rows=1 width=8) (actual time=0.001..0.001 rows=1.00 loops=2400)
+                        Buffers: shared hit=7476
+                        ->  Index Only Scan using trips_rider_requested_idx on trips t  (cost=0.42..16.61 rows=11 width=8) (actual time=0.001..0.001 rows=1.00 loops=2400)
+                              Index Cond: (rider_id = r.rider_id)
+                              Heap Fetches: 275
+                              Index Searches: 2400
+                              Buffers: shared hit=7476
+Planning:
+  Buffers: shared hit=491
+Planning Time: 0.943 ms
+Execution Time: 4.818 ms

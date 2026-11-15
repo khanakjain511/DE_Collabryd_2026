@@ -1,0 +1,78 @@
+=== R12 run 1 ===
+GroupAggregate  (cost=10012.51..10865.04 rows=31001 width=72) (actual time=153.172..156.547 rows=24.00 loops=1)
+  Group Key: (EXTRACT(hour FROM t.requested_at))
+  Buffers: shared hit=1746 read=4048 written=3231
+  ->  Sort  (cost=10012.51..10090.01 rows=31001 width=37) (actual time=153.004..153.939 rows=48097.00 loops=1)
+        Sort Key: (EXTRACT(hour FROM t.requested_at))
+        Sort Method: quicksort  Memory: 3024kB
+        Buffers: shared hit=1746 read=4048 written=3231
+        ->  Nested Loop  (cost=728.68..7699.83 rows=31001 width=37) (actual time=7.751..147.842 rows=48097.00 loops=1)
+              Buffers: shared hit=1743 read=4048 written=3231
+              ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.005..0.009 rows=1.00 loops=1)
+                    Filter: ((city_name)::text = 'Delhi'::text)
+                    Rows Removed by Filter: 9
+                    Buffers: shared hit=1
+              ->  Bitmap Heap Scan on trips t  (cost=728.68..7311.19 rows=31001 width=17) (actual time=7.556..136.813 rows=48097.00 loops=1)
+                    Recheck Cond: (c.city_id = city_id)
+                    Heap Blocks: exact=5603
+                    Buffers: shared hit=1742 read=4048 written=3231
+                    ->  Bitmap Index Scan on trips_city_requested_idx  (cost=0.00..720.93 rows=31001 width=0) (actual time=7.160..7.162 rows=48097.00 loops=1)
+                          Index Cond: (city_id = c.city_id)
+                          Index Searches: 1
+                          Buffers: shared hit=35 read=152 written=152
+Planning:
+  Buffers: shared hit=559
+Planning Time: 0.777 ms
+Execution Time: 156.779 ms
+=== R12 run 2 ===
+GroupAggregate  (cost=10012.51..10865.04 rows=31001 width=72) (actual time=20.966..26.267 rows=24.00 loops=1)
+  Group Key: (EXTRACT(hour FROM t.requested_at))
+  Buffers: shared hit=5794
+  ->  Sort  (cost=10012.51..10090.01 rows=31001 width=37) (actual time=20.788..22.211 rows=48097.00 loops=1)
+        Sort Key: (EXTRACT(hour FROM t.requested_at))
+        Sort Method: quicksort  Memory: 3024kB
+        Buffers: shared hit=5794
+        ->  Nested Loop  (cost=728.68..7699.83 rows=31001 width=37) (actual time=1.454..15.550 rows=48097.00 loops=1)
+              Buffers: shared hit=5791
+              ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.004..0.009 rows=1.00 loops=1)
+                    Filter: ((city_name)::text = 'Delhi'::text)
+                    Rows Removed by Filter: 9
+                    Buffers: shared hit=1
+              ->  Bitmap Heap Scan on trips t  (cost=728.68..7311.19 rows=31001 width=17) (actual time=1.440..9.321 rows=48097.00 loops=1)
+                    Recheck Cond: (c.city_id = city_id)
+                    Heap Blocks: exact=5603
+                    Buffers: shared hit=5790
+                    ->  Bitmap Index Scan on trips_city_requested_idx  (cost=0.00..720.93 rows=31001 width=0) (actual time=1.085..1.087 rows=48097.00 loops=1)
+                          Index Cond: (city_id = c.city_id)
+                          Index Searches: 1
+                          Buffers: shared hit=187
+Planning:
+  Buffers: shared hit=559
+Planning Time: 0.923 ms
+Execution Time: 26.312 ms
+=== R12 run 3 ===
+GroupAggregate  (cost=10012.51..10865.04 rows=31001 width=72) (actual time=47.360..61.625 rows=24.00 loops=1)
+  Group Key: (EXTRACT(hour FROM t.requested_at))
+  Buffers: shared hit=5794
+  ->  Sort  (cost=10012.51..10090.01 rows=31001 width=37) (actual time=46.591..53.138 rows=48097.00 loops=1)
+        Sort Key: (EXTRACT(hour FROM t.requested_at))
+        Sort Method: quicksort  Memory: 3024kB
+        Buffers: shared hit=5794
+        ->  Nested Loop  (cost=728.68..7699.83 rows=31001 width=37) (actual time=2.310..35.725 rows=48097.00 loops=1)
+              Buffers: shared hit=5791
+              ->  Seq Scan on cities c  (cost=0.00..1.12 rows=1 width=4) (actual time=0.004..0.008 rows=1.00 loops=1)
+                    Filter: ((city_name)::text = 'Delhi'::text)
+                    Rows Removed by Filter: 9
+                    Buffers: shared hit=1
+              ->  Bitmap Heap Scan on trips t  (cost=728.68..7311.19 rows=31001 width=17) (actual time=2.281..16.031 rows=48097.00 loops=1)
+                    Recheck Cond: (c.city_id = city_id)
+                    Heap Blocks: exact=5603
+                    Buffers: shared hit=5790
+                    ->  Bitmap Index Scan on trips_city_requested_idx  (cost=0.00..720.93 rows=31001 width=0) (actual time=1.643..1.644 rows=48097.00 loops=1)
+                          Index Cond: (city_id = c.city_id)
+                          Index Searches: 1
+                          Buffers: shared hit=187
+Planning:
+  Buffers: shared hit=559
+Planning Time: 0.971 ms
+Execution Time: 61.676 ms
