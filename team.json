@@ -6,6 +6,6 @@
     { "name": "Akshay Kumar Singh", "enrollment_no": "2501010582", "github": "akshay26-ui" },
     { "name": "Labhansh Agarwal", "enrollment_no": "2501010696", "github": "ARISTOTLE777" }
   ],
-  "postgres_version": "18.6",
-  "laptop_used_for_benchmarks": "Macbook Pro (16-inch, 2021) with Apple M4 Max chip"
+  "postgres_version": "17.11",
+  "laptop_used_for_benchmarks": "Apple MacBook Pro (Apple M4 Chip, 16 GB Unified Memory, macOS arm64)"
 }
